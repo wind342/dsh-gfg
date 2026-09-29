@@ -29,11 +29,12 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.check.json",
     "prepack": "pnpm build",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=artifacts/TEST_RESULTS.xml tests/*.test.ts",
     "test:report": "tsx --test --test-reporter=junit --test-reporter-destination=artifacts/TEST_RESULTS.xml tests/*.test.ts",
     "demo": "tsx examples/demo.ts",
     "verify": "tsx examples/verify-artifacts.ts",
-    "benchmark": "tsx examples/benchmark.ts"
+    "benchmark": "tsx examples/benchmark.ts",
+    "profile:smoke": "node examples/profile-install-smoke.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.0.4",

@@ -19,6 +19,8 @@
     "body_calls": 1,
     "trace_nodes": 40,
     "trace_edges": 39,
+    "raw_trace_bytes": 44055,
+    "model_trace_bytes": 30792,
     "stages": [
       "assistant/message",
       "assistant/tool-call",
@@ -52,6 +54,8 @@
     "body_calls": 0,
     "trace_nodes": 32,
     "trace_edges": 31,
+    "raw_trace_bytes": 37490,
+    "model_trace_bytes": 24716,
     "stages": [
       "assistant/message",
       "assistant/tool-call",

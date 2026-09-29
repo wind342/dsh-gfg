@@ -65,9 +65,19 @@ dsh --profile headless "Read a.txt, then use gfg_trace with the read tool's call
 The package declares `dsh.bundle` and contains `cordis.patch.yml`, so the profile
 plugin manager can enable its row. Use the official `dsh` launcher, not a separate
 home-made app bootstrap. Set up your model provider/credentials in Harness itself.
-This project's automated tests exercise the published plugin interfaces and AgentLoop;
-an installed product CLI profile and live provider remain **unverified here**.
+The official CLI **0.2.0-rc.2** profile install smoke also runs without a provider:
+it packs this plugin, installs the tarball with `dsh plugin`, checks the enabled
+bundle and `--dump-config` row, and boots a minimal profile through the official
+launcher until its application-ready callback observes the GFG service.
+A live provider remains **unverified here**.
 Do not silently override the pinned compatibility range on another Harness version.
+
+Run `pnpm profile:smoke /absolute/path/to/@deepseek-ai/dsh/lib/bin.js` with an
+independently installed official CLI. The smoke uses a fresh ignored `.profile-smoke/`
+home, not your real Harness profile. It records failure as
+`product_cli_profile_test: false`; packing alone is not a profile PASS.
+[Actual CLI smoke result](artifacts/PROFILE_INSTALL_SMOKE.json) includes source
+hashes checked by `pnpm verify` to detect stale evidence.
 
 The tarball was separately installed into an isolated package directory and its
 registered tools exercised with `node examples/package-smoke.mjs <install-directory>`.
@@ -97,8 +107,17 @@ real-user graphs automatically. Only public fixture artifacts are committed here
 ```
 
 - `gfg_trace`: backward/forward local graph traversal; returns `nodes`, `edges`,
-  `formation_path`, `evidence_receipts`, `complete`, and `truncated`.
-- `gfg_get_node({"id":"..."})`: one exact node.
+  `formation_path`, `evidence_refs`, `target`, `direction`, `complete`, and `truncated`.
+- `gfg_get_node({"id":"..."})`: the structural projection of one exact node.
+
+Both queries use a positive field allowlist. They never return raw receipt/node
+payloads, canonical values, arguments, metadata or error text, including data hidden
+by post-execute policy. Receipt references retain the ID/SHA-256, evidence availability
+and `payload_visibility: "private"`. Full evidence remains in the private journal
+and internal RuntimeGFG, unchanged. There is no model-callable raw-payload option.
+The simple read demo's compact JSON trace is **30,792 bytes**, versus **44,055 bytes**
+for the same internal full-receipt trace (about **30% smaller**); graph nodes and
+edges are retained. This is not a compressed graph protocol.
 
 Targets may be a fact/occurrence/outcome ID, a durable tool-result message ID,
 or the original provider tool-call ID. `result:<callId>` addresses the final runtime
@@ -131,6 +150,9 @@ Denial, cancellation, execution failure, suppression and unobserved settlement a
 `ExplicitDisposition`s. Missing upstream history becomes an explicit source record,
 not a fabricated stage. On capture failure, ordinary results still pass through;
 the graph is marked incomplete and query tools refuse to present it as complete.
+An error without observed `tools/execute` is conservatively classified as
+`policy_or_pre_dispatch_unobserved`, unless a known denied/cancelled/not-executed
+classification is available. It is never guessed to be `execution_failed`.
 
 ## Graph structure
 
@@ -162,6 +184,11 @@ failed/cancelled calls, explicit missing outcomes, multi-source exact bindings,
 concurrency, nesting, repeated IDs, session isolation, byte-identical deterministic
 graphs, journal replay, tampering and capture failures. `pnpm check` typechecks both
 the product and fixtures.
+Regression tests also cover post-policy secret redaction (including content-only
+redaction), monotonic guard rejection with zero body calls, unobserved pre-dispatch
+failures, and compact query size with unchanged internal evidence.
+GitHub Actions runs frozen install, build, typecheck, tests, demo and verification
+on Node 24. The separately recorded real CLI smoke is source-hash bound.
 
 Run `pnpm test:report && pnpm demo && pnpm verify` to regenerate the machine-readable
 [checks](artifacts/CHECKS.json) and [test results](artifacts/TEST_RESULTS.json).

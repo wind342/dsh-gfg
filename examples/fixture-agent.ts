@@ -11,6 +11,7 @@ import AgentLoop from '@deepseek-ai/dsh-agent-loop';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import * as GFG from '../src/plugin/index.js';
+import type { modelTrace } from '../src/plugin/model-view.js';
 
 class FixtureAdapter extends LlmAdapter {
   calls = 0;
@@ -71,7 +72,10 @@ export async function runFixture(options: { capture?: boolean; denied?: boolean;
     if (!ordinary || ordinary.type !== 'tool/result') throw new Error('NO_ORDINARY_RESULT');
     if (capture && (!query || query.type !== 'tool/result' || query.data.message.isError)) throw new Error('NO_SUCCESSFUL_TRACE_RESULT');
     if (capture) ctx.gfg.save(agent.session.id);
-    return { graph: graph?.export(), trace: graph?.trace('read-1'), ordinary: ordinary.data.message.content,
+    const traceText = query?.type === 'tool/result' ? query.data.message.content.find(block => block.type === 'text') : undefined;
+    const trace = traceText?.type === 'text' ? JSON.parse(traceText.text) as ReturnType<typeof modelTrace> : undefined;
+    return { graph: graph?.export(), trace, rawTraceBytes: graph ? Buffer.byteLength(JSON.stringify(graph.trace('read-1'))) : 0,
+      traceBytes: trace ? Buffer.byteLength(JSON.stringify(trace)) : 0, ordinary: ordinary.data.message.content,
       query: query?.type === 'tool/result' ? query.data.message.content : undefined, bodyCalls,
       stages: graph?.receipts.map(r => r.stage), events: events.map(e => e.type) };
   } finally { await ctx.fiber.dispose(); }

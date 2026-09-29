@@ -7,18 +7,19 @@ import { RuntimeGFG, type Source } from '../runtime/graph.js';
 import { canonical, hash } from '../runtime/canonical.js';
 
 export interface Config { directory?: string; runId?: string }
-type Call = { latest?: string; tokenId?: string; name: string; finished?: boolean; terminalDisposition?: string };
+type Call = { latest?: string; tokenId?: string; name: string; finished?: boolean; terminalDisposition?: string; executionObserved?: boolean };
 type Run = { graph: RuntimeGFG; calls: Map<string, Call>; tokens: Map<symbol, Call>; ignoredCalls: Set<string>; directory?: string };
 const QUERY_TOOLS = new Set(['gfg_trace', 'gfg_get_node']);
 export const excluded = (name: string) => QUERY_TOOLS.has(name);
 
-function disposition(result: { isError: boolean; error?: { info?: { code?: string }; code?: string } }): string | undefined {
+type FailureObservation = { isError: boolean; error?: { info?: { code?: string }; code?: string } };
+function disposition(result: FailureObservation, executionObserved = false): string | undefined {
   if (!result.isError) return undefined;
   const code = result.error?.info?.code ?? result.error?.code;
   if (code === 'ABORTED' || code === 'ABORTED_BEFORE_DISPATCH') return 'cancelled';
   if (code === 'TOOL_NOT_STARTED' || code === 'UNKNOWN_TOOL') return 'not_executed';
   if (code === 'TOOL_OUTCOME_UNKNOWN') return 'outcome_unobserved';
-  return 'execution_failed';
+  return executionObserved ? 'execution_failed' : 'policy_or_pre_dispatch_unobserved';
 }
 
 /** Session and registry identities bind events, never timestamps or text matching. */
@@ -71,9 +72,11 @@ export class HarnessCapture {
     const sessionId = this.scope(exec);
     this.safely(sessionId, () => {
       const run = this.run(sessionId), call = this.call(run, exec);
+      if (stage === 'tools/execute:enter' || stage === 'tools/execute') call.executionObserved = true;
       if (stage === 'tools/pre-execute' && (category === 'denied' || category === 'cancelled')) call.terminalDisposition = category;
       if (stage === 'tools/post-execute' && category === 'suppressed') call.terminalDisposition = category;
       if (category === 'execution_failed' && call.terminalDisposition) category = call.terminalDisposition;
+      if (category === 'execution_failed' && !call.executionObserved) category = 'policy_or_pre_dispatch_unobserved';
       const identity = { callId: exec.callId, rootCallId: exec.rootCallId, name: exec.name,
         ...(exec.arguments === undefined ? { arguments_unavailable: true } : { arguments: exec.arguments }), execution_token: call.tokenId!,
         parent_token: exec.parent ? run.tokens.get(exec.parent)?.tokenId ?? 'unobserved' : null,
@@ -86,7 +89,13 @@ export class HarnessCapture {
     });
   }
   result(exec: ToolExecution, result: Readonly<ToolExecutionResult>): void {
-    this.runtime(exec, 'tools/result', result, disposition(result));
+    this.runtime(exec, 'tools/result', result, this.resultDisposition(exec, result));
+  }
+  resultDisposition(exec: ToolExecution, result: FailureObservation): string | undefined {
+    const call = this.runs.get(this.scope(exec))?.tokens.get(exec.token);
+    const category = disposition(result, call?.executionObserved === true);
+    return category === 'execution_failed' || category === 'policy_or_pre_dispatch_unobserved'
+      ? call?.terminalDisposition ?? category : category;
   }
   session(session: Session, event: SessionEvent): void {
     this.safely(session.id, () => {
@@ -121,7 +130,10 @@ export class HarnessCapture {
         const call = run.calls.get(id) ?? { name: 'unobserved_call' };
         call.latest = this.capture(run, event.type, id, call.latest ?? {
           source_key: `durable_result:${session.id}:${event.seq}`, payload: event.data }, event, event.data,
-          event.data.message.isError ? call.terminalDisposition ?? disposition({ isError: true, error: event.data.error }) : undefined, [id, event.data.message.id]);
+          event.data.message.isError ? (() => {
+            const category = disposition({ isError: true, error: event.data.error }, call.executionObserved === true);
+            return category === 'execution_failed' || category === 'policy_or_pre_dispatch_unobserved' ? call.terminalDisposition ?? category : category;
+          })() : undefined, [id, event.data.message.id]);
         call.finished = true;
         run.calls.set(id, call);
       }

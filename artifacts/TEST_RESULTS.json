@@ -1,92 +1,117 @@
 {
   "source": "Node test runner JUnit report; absolute paths omitted",
-  "passed": 17,
+  "passed": 22,
   "failed": 0,
   "skipped": 0,
   "tests": [
     {
       "name": "actual AgentLoop produces all required durable and runtime stages and queries the graph",
-      "seconds": 0.059606,
+      "seconds": 0.058728,
       "status": "PASS"
     },
     {
       "name": "actual AgentLoop denial records disposition without executing the body",
-      "seconds": 0.031223,
+      "seconds": 0.019844,
       "status": "PASS"
     },
     {
       "name": "actual Harness tool outputs are identical capture OFF/ON, including failure and denial",
-      "seconds": 0.036594,
+      "seconds": 0.049074,
       "status": "PASS"
     },
     {
       "name": "gfg_trace is an actual registered model-callable tool without self capture",
-      "seconds": 0.007741,
+      "seconds": 0.00877,
       "status": "PASS"
     },
     {
       "name": "concurrent executions have independent formation chains",
-      "seconds": 0.006192,
+      "seconds": 0.007772,
       "status": "PASS"
     },
     {
       "name": "the same actual deterministic Harness workload produces byte-identical GFG",
-      "seconds": 0.024727,
+      "seconds": 0.030598,
       "status": "PASS"
     },
     {
       "name": "repeated provider call IDs are ambiguous, never joined by chronology",
-      "seconds": 0.008175,
+      "seconds": 0.007541,
       "status": "PASS"
     },
     {
       "name": "nested calls bind to the explicit parent token",
-      "seconds": 0.012103,
+      "seconds": 0.013218,
       "status": "PASS"
     },
     {
       "name": "capture failure is explicit and does not alter a tool result",
-      "seconds": 0.00467,
+      "seconds": 0.004451,
       "status": "PASS"
     },
     {
       "name": "queries cannot cross session boundaries",
-      "seconds": 0.0047,
+      "seconds": 0.00471,
       "status": "PASS"
     },
     {
       "name": "close records unobserved outcomes explicitly, not as fabricated failures",
-      "seconds": 0.004162,
+      "seconds": 0.005614,
+      "status": "PASS"
+    },
+    {
+      "name": "post-policy redaction cannot be bypassed by either GFG tool; private journal retains the evidence",
+      "seconds": 0.052824,
+      "status": "PASS"
+    },
+    {
+      "name": "content-only redaction also keeps canonical value and metadata private",
+      "seconds": 0.007563,
+      "status": "PASS"
+    },
+    {
+      "name": "monotonic guard rejection never claims an execution failure",
+      "seconds": 0.005663,
+      "status": "PASS"
+    },
+    {
+      "name": "unresolved approval and throwing pre-policy are conservative, including durable-only errors",
+      "seconds": 0.009335,
+      "status": "PASS"
+    },
+    {
+      "name": "compact model trace is smaller without changing its topology or private graph",
+      "seconds": 0.008393,
       "status": "PASS"
     },
     {
       "name": "canonical JSON is stable and rejects silent loss",
-      "seconds": 0.000968,
+      "seconds": 0.001886,
       "status": "PASS"
     },
     {
       "name": "exact multi-source binding never creates Cartesian ancestry",
-      "seconds": 0.004328,
+      "seconds": 0.006661,
       "status": "PASS"
     },
     {
       "name": "bounded traces contain only valid edge endpoints",
-      "seconds": 0.018675,
+      "seconds": 0.018409,
       "status": "PASS"
     },
     {
       "name": "deterministic receipts, graph, journal replay and aliases",
-      "seconds": 0.006753,
+      "seconds": 0.011497,
       "status": "PASS"
     },
     {
       "name": "tampering with receipts, bindings, aliases or IDs fails validation",
-      "seconds": 0.003196,
+      "seconds": 0.003997,
       "status": "PASS"
     },
     {
       "name": "missing outcome requires explicit disposition and unresolved origin fails",
-      "seconds": 0.000853,
+      "seconds": 0.00097,
       "status": "PASS"
     }
   ]

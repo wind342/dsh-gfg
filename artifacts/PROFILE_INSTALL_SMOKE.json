@@ -1,0 +1,25 @@
+{
+  "product_cli_profile_test": true,
+  "pack": true,
+  "profile_install": true,
+  "bundle_enabled": true,
+  "dump_config": true,
+  "plugin_started": true,
+  "tested_source_sha256": {
+    "package.json": "6a562a7ec5f191d7453aa333eeca79bbf081c029ff50e8da3e801c4342583e44",
+    "pnpm-lock.yaml": "10fd2e3d1fa962f5c0f6187806a210155e9e0e1a9c531dbc2fb098e56aefeded",
+    "cordis.patch.yml": "2e0cc822b2ddca035b3b99b28a7009e90bfafc6c5ed4d131dd305efe523881b5",
+    "README.md": "e45dc21f33a94b891fd54083ee8baeec0e6b35fd0299f31f0fe4ac3448b24058",
+    "examples/profile-install-smoke.mjs": "e7276bb3e8293c47518eb3833890967c53bc0ce3b1edac523a974200b412da14",
+    "examples/profile-smoke-probe.mjs": "feeb3311de9f23d85c2b7a2d2063efa68e626c1f29ad75b912fc6d28a5d636cf",
+    "src/plugin/harness-capture.ts": "955e17a21fbcbf6e77404d6fc16fa5a27b03bcb62de305ac2da8325fc6dee574",
+    "src/plugin/index.ts": "ae9dd53c4b1e23eb6e5da9b26f999659fb0df28c3a6a1a4c1fdc978ade1ad81a",
+    "src/plugin/model-view.ts": "73338603c2517478409c15607203ca3ce5e5074bf39ec9a256d8f4f0387d884b",
+    "src/runtime/canonical.ts": "262284527efb8df0382f93dc769c0ff5b9edfd8e26ce2746e74d66535cdfc13e",
+    "src/runtime/graph.ts": "5d7c51a784733af26aaeaafffc1a6a3e17224d2e2fc303c77ae2286ecd1c5726"
+  },
+  "tarball_sha256": "36ddd82d77234fef5c774ad6bf067affe4883f30448671346ebe3d6b77325273",
+  "cli_version": "0.2.0-rc.2",
+  "platform": "win32",
+  "node_version": "v24.19.0"
+}

@@ -17,7 +17,8 @@ for (const denied of [false, true]) {
   writeFileSync(join('artifacts', `${prefix}-trace.json`), JSON.stringify(on.trace, null, 2) + '\n');
   const summary = { scenario: prefix, mode: 'real Harness AgentLoop + scripted LLM fixture (no remote model)',
     capture_invariance: 'PASS', checks, output: on.ordinary, body_calls: on.bodyCalls,
-    trace_nodes: on.trace.nodes.length, trace_edges: on.trace.edges.length, stages: on.stages };
+    trace_nodes: on.trace.nodes.length, trace_edges: on.trace.edges.length,
+    raw_trace_bytes: on.rawTraceBytes, model_trace_bytes: on.traceBytes, stages: on.stages };
   summaries.push(summary); console.log(JSON.stringify(summary, null, 2));
 }
 writeFileSync('artifacts/DEMO_RESULTS.json', JSON.stringify(summaries, null, 2) + '\n');

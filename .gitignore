@@ -6,4 +6,5 @@ dist/
 .env*
 coverage/
 .package-smoke/
+.profile-smoke/
 artifacts/TEST_RESULTS.xml
