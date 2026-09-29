@@ -61,6 +61,33 @@ test('capture failure is explicit and does not alter a tool result', async () =>
     assert.equal(query.isError, true);
   } finally { await ctx.fiber.dispose(); }
 });
+test('capture failure in one session does not block a clean session query', async () => {
+  const ctx = await setup();
+  try {
+    const failed = ctx.gfg.run('failed-session').graph;
+    ctx.gfg.safely('failed-session', () => { throw new Error('SESSION_A_CAPTURE_FAILURE'); });
+    assert.ok(failed.failures.includes('SESSION_A_CAPTURE_FAILURE'));
+    assert.ok(ctx.gfg.errors.includes('SESSION_A_CAPTURE_FAILURE'));
+
+    const result = await ctx.tools.execute({
+      callId: ToolCallId('healthy'),
+      name: 'echo',
+      arguments: {},
+      signal: new AbortController().signal,
+    });
+    assert.equal(result.isError, false);
+
+    const healthy = ctx.gfg.run().graph;
+    assert.deepEqual(healthy.failures, []);
+    const query = await ctx.tools.execute({
+      callId: ToolCallId('query-healthy'),
+      name: 'gfg_trace',
+      arguments: { target_id: 'result:healthy' },
+      signal: new AbortController().signal,
+    });
+    assert.equal(query.isError, false);
+  } finally { await ctx.fiber.dispose(); }
+});
 test('queries cannot cross session boundaries', async () => {
   const ctx = await setup();
   try {
