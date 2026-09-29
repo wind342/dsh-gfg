@@ -1,22 +1,23 @@
 # GFG for DeepSeek Harness: queryable formation graphs for agent tool actions
 
-I built a small plugin that lets an agent ask how a tool result was formed.
+I built a lightweight plugin that lets a Harness agent ask how a tool result was actually formed.
 
-`gfg_trace({"target_id":"read-1"})` returns a structured subgraph linking the
-durable result to the real execution, policy decision and original assistant
-tool call. It uses runtime identities rather than timestamp or text matching.
+`gfg_trace({"target_id":"read-1"})` returns a structured formation subgraph linking the durable result back through the observed runtime stages to the original assistant tool call. Relations are bound using native runtime identities rather than timestamps, text similarity, or log proximity.
 
-The reproducible demo runs the published Harness AgentLoop and tools with a
-scripted LLM adapter: read `a.txt` → `hello` → call `gfg_trace`. A second demo
-denies a call and records an explicit disposition without executing the tool.
-No remote model/API key is used in that demo.
+The reproducible demo runs the published Harness AgentLoop and tool runtime with a scripted LLM adapter:
 
-Ordinary outputs are identical with capture on/off in the deterministic tests.
-Raw structured receipts are retained with SHA-256 hashes. The graph is incrementally
-compiled; queries use local indexes, not a full validation pass. It is formation
-provenance, not a causal explanation or an attempt to capture hidden model reasoning.
+`read a.txt → hello → gfg_trace`
 
-Code, tests and example graphs: https://github.com/wind342/dsh-gfg
+A second demo denies a call and records an explicit disposition without executing the tool body. Unobserved pre-dispatch policy outcomes are recorded conservatively rather than guessed.
+
+The plugin keeps full structured receipts privately with SHA-256 identities, while model-callable GFG queries expose only a safe structural projection. The graph is compiled incrementally and queried through local indexes; there is no full validation pass on each query.
+
+This is **formation provenance**, not a causal explanation and not an attempt to capture hidden model reasoning.
+
+The current version has **22 passing tests**, including capture ON/OFF output invariance, exact multi-source bindings, denial/failure/cancellation, concurrent and nested calls, tamper detection, private-result redaction, and deterministic graph replay. GitHub Actions is green, and installation through the official Harness **0.2.0-rc.2** profile/plugin path has also been verified.
+
+Code, tests and example graphs:
+https://github.com/wind342/dsh-gfg
 
 ```sh
 pnpm install --frozen-lockfile
@@ -25,7 +26,6 @@ pnpm test
 pnpm demo
 ```
 
-The plugin targets Harness 0.2.0-rc.2. A live-provider/product-profile run is not yet
-verified. I'd welcome feedback on the capture boundaries and trace format.
+A live-provider run is not yet part of the verification set. I'd especially welcome feedback on the capture boundaries and the model-facing trace format.
 
-Raw production receipts may contain secrets or file contents, so keep them private.
+Raw production receipts may contain prompts, file contents, arguments or tool results, so they should be kept private.
