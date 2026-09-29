@@ -18,4 +18,11 @@ jobs:
       - run: pnpm check
       - run: pnpm test
       - run: pnpm demo
+      - name: Install official Harness CLI for profile smoke
+        run: |
+          mkdir -p .profile-smoke/runtime
+          printf '{"private":true}\n' > .profile-smoke/runtime/package.json
+          pnpm --dir .profile-smoke/runtime add @deepseek-ai/dsh@0.2.0-rc.2
+      - name: Verify official profile install
+        run: pnpm profile:smoke .profile-smoke/runtime/node_modules/@deepseek-ai/dsh/lib/bin.js
       - run: pnpm verify
