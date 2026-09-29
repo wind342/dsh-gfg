@@ -57,16 +57,17 @@ export function apply(ctx: Context, config: Config = {}): void {
     name: 'gfg_trace', description: 'Return compact formation structure and private evidence references, never raw payloads. Use a previous tool call ID, result:<callId>, fact ID or occurrence ID. Current session only. Query tools themselves are excluded from capture.',
     parameters: { target_id: { type: 'string', required: true }, direction: { type: 'string', enum: ['backward', 'forward'] }, max_depth: { type: 'integer' } }, output,
     async execute(args, exec) {
-      if (capture.errors.length) throw new Error('CAPTURE_INCOMPLETE');
-      return modelTrace(capture.run(capture.scope(exec)).graph.trace(args.target_id, args.direction as 'backward' | 'forward' | undefined, args.max_depth)) as JsonValue;
+      const graph = capture.run(capture.scope(exec)).graph;
+      if (graph.failures.length) throw new Error('CAPTURE_INCOMPLETE');
+      return modelTrace(graph.trace(args.target_id, args.direction as 'backward' | 'forward' | undefined, args.max_depth)) as JsonValue;
     },
   }));
   ctx.tools.register(defineTool({
     name: 'gfg_get_node', description: 'Return structural metadata for one captured GFG node in this session, never its private payload.',
     parameters: { id: { type: 'string', required: true } }, output,
     async execute(args, exec) {
-      if (capture.errors.length) throw new Error('CAPTURE_INCOMPLETE');
       const graph = capture.run(capture.scope(exec)).graph;
+      if (graph.failures.length) throw new Error('CAPTURE_INCOMPLETE');
       return modelNode(graph.nodes.get(graph.resolve(args.id))!) as JsonValue;
     },
   }));
