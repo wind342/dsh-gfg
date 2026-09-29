@@ -1,0 +1,93 @@
+{
+  "source": "Node test runner JUnit report; absolute paths omitted",
+  "passed": 17,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "name": "actual AgentLoop produces all required durable and runtime stages and queries the graph",
+      "seconds": 0.059606,
+      "status": "PASS"
+    },
+    {
+      "name": "actual AgentLoop denial records disposition without executing the body",
+      "seconds": 0.031223,
+      "status": "PASS"
+    },
+    {
+      "name": "actual Harness tool outputs are identical capture OFF/ON, including failure and denial",
+      "seconds": 0.036594,
+      "status": "PASS"
+    },
+    {
+      "name": "gfg_trace is an actual registered model-callable tool without self capture",
+      "seconds": 0.007741,
+      "status": "PASS"
+    },
+    {
+      "name": "concurrent executions have independent formation chains",
+      "seconds": 0.006192,
+      "status": "PASS"
+    },
+    {
+      "name": "the same actual deterministic Harness workload produces byte-identical GFG",
+      "seconds": 0.024727,
+      "status": "PASS"
+    },
+    {
+      "name": "repeated provider call IDs are ambiguous, never joined by chronology",
+      "seconds": 0.008175,
+      "status": "PASS"
+    },
+    {
+      "name": "nested calls bind to the explicit parent token",
+      "seconds": 0.012103,
+      "status": "PASS"
+    },
+    {
+      "name": "capture failure is explicit and does not alter a tool result",
+      "seconds": 0.00467,
+      "status": "PASS"
+    },
+    {
+      "name": "queries cannot cross session boundaries",
+      "seconds": 0.0047,
+      "status": "PASS"
+    },
+    {
+      "name": "close records unobserved outcomes explicitly, not as fabricated failures",
+      "seconds": 0.004162,
+      "status": "PASS"
+    },
+    {
+      "name": "canonical JSON is stable and rejects silent loss",
+      "seconds": 0.000968,
+      "status": "PASS"
+    },
+    {
+      "name": "exact multi-source binding never creates Cartesian ancestry",
+      "seconds": 0.004328,
+      "status": "PASS"
+    },
+    {
+      "name": "bounded traces contain only valid edge endpoints",
+      "seconds": 0.018675,
+      "status": "PASS"
+    },
+    {
+      "name": "deterministic receipts, graph, journal replay and aliases",
+      "seconds": 0.006753,
+      "status": "PASS"
+    },
+    {
+      "name": "tampering with receipts, bindings, aliases or IDs fails validation",
+      "seconds": 0.003196,
+      "status": "PASS"
+    },
+    {
+      "name": "missing outcome requires explicit disposition and unresolved origin fails",
+      "seconds": 0.000853,
+      "status": "PASS"
+    }
+  ]
+}

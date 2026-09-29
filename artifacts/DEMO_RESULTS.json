@@ -1,0 +1,66 @@
+[
+  {
+    "scenario": "demo",
+    "mode": "real Harness AgentLoop + scripted LLM fixture (no remote model)",
+    "capture_invariance": "PASS",
+    "checks": {
+      "status": "PASS",
+      "complete": true,
+      "receipts": 10,
+      "facts": 10,
+      "occurrences": 10
+    },
+    "output": [
+      {
+        "type": "text",
+        "text": "hello\n"
+      }
+    ],
+    "body_calls": 1,
+    "trace_nodes": 40,
+    "trace_edges": 39,
+    "stages": [
+      "assistant/message",
+      "assistant/tool-call",
+      "tool/call",
+      "tools/pre-execute:enter",
+      "tools/pre-execute",
+      "tools/execute:enter",
+      "tools/execute",
+      "tools/post-execute",
+      "tools/result",
+      "tool/result"
+    ]
+  },
+  {
+    "scenario": "denied",
+    "mode": "real Harness AgentLoop + scripted LLM fixture (no remote model)",
+    "capture_invariance": "PASS",
+    "checks": {
+      "status": "PASS",
+      "complete": true,
+      "receipts": 8,
+      "facts": 8,
+      "occurrences": 8
+    },
+    "output": [
+      {
+        "type": "text",
+        "text": "Error: Synthetic demo policy denies denied.txt"
+      }
+    ],
+    "body_calls": 0,
+    "trace_nodes": 32,
+    "trace_edges": 31,
+    "stages": [
+      "assistant/message",
+      "assistant/tool-call",
+      "tool/call",
+      "tools/pre-execute:enter",
+      "tools/pre-execute",
+      "tools/post-execute",
+      "tools/result",
+      "tool/result"
+    ]
+  }
+]

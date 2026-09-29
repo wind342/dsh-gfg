@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540" role="img" aria-labelledby="title desc">
+  <title id="title">Runtime formation graph</title>
+  <desc id="desc">Real Harness assistant, policy, execution and result stages captured as hashed receipts and incrementally compiled facts, queried by gfg_trace. Denial leads to an explicit disposition without execution.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+  <rect width="800" height="540" fill="#fff"/>
+  <g font-family="Arial, sans-serif" fill="#172337">
+    <text x="35" y="40" font-size="25">GFG for DeepSeek Harness</text>
+    <text x="35" y="67" font-size="14">Actual runtime formation, not log correlation or causal explanation</text>
+    <g fill="#f1f5f9" stroke="#475569">
+      <rect x="35" y="100" width="285" height="55" rx="6"/>
+      <rect x="35" y="190" width="285" height="55" rx="6"/>
+      <rect x="35" y="280" width="285" height="55" rx="6"/>
+      <rect x="35" y="370" width="285" height="55" rx="6"/>
+      <rect x="420" y="100" width="345" height="80" rx="6"/>
+      <rect x="420" y="370" width="345" height="55" rx="6"/>
+      <rect x="420" y="460" width="345" height="50" rx="6"/>
+    </g>
+    <g font-size="17" text-anchor="middle">
+      <text x="177" y="133">Assistant tool-call settlement</text>
+      <text x="177" y="223">Pre-execute / policy decision</text>
+      <text x="177" y="313">Actual tool execution</text>
+      <text x="177" y="403">Final + durable tool result</text>
+      <text x="592" y="133">Full structured receipts</text>
+      <text x="592" y="158" font-size="14">canonical JSON + SHA-256</text>
+      <text x="592" y="403">Incremental fact / occurrence graph</text>
+      <text x="592" y="491">gfg_trace → formation subgraph</text>
+    </g>
+    <g stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M177 155V190"/><path d="M177 245V280"/><path d="M177 335V370"/>
+      <path d="M320 128H420"/><path d="M320 398H420"/><path d="M592 180V370"/><path d="M592 425V460"/>
+      <path d="M320 218H390"/>
+    </g>
+    <rect x="393" y="198" width="175" height="63" rx="6" fill="#fff3df" stroke="#8a5a12"/>
+    <text x="480" y="223" text-anchor="middle" font-size="16">ExplicitDisposition</text>
+    <text x="480" y="246" text-anchor="middle" font-size="14">denied: no execution</text>
+    <text x="35" y="480" font-size="13">Outcome → GeneratedOrigin → next occurrence</text>
+    <text x="35" y="502" font-size="13">Ordinary tool output remains unchanged.</text>
+  </g>
+</svg>

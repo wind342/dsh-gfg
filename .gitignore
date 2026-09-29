@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.gfg/
+.demo-private/
+*.tgz
+.env*
+coverage/
+.package-smoke/
+artifacts/TEST_RESULTS.xml

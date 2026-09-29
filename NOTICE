@@ -1,0 +1,7 @@
+dsh-gfg
+Copyright 2026 Mian Wang
+
+Generation-fact semantics and graph organization are adapted from Mian Wang's
+GFG work. This lightweight runtime is not the Core v3 validation implementation.
+DeepSeek Harness is a separate MIT-licensed dependency. canonicalize is Apache-2.0.
+This project is independent and is not an official DeepSeek product.

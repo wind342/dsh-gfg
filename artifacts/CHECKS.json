@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "graph_checks": [
+    {
+      "scenario": "demo",
+      "status": "PASS",
+      "complete": true,
+      "receipts": 10,
+      "facts": 10,
+      "occurrences": 10,
+      "trace": "PASS"
+    },
+    {
+      "scenario": "denied",
+      "status": "PASS",
+      "complete": true,
+      "receipts": 8,
+      "facts": 8,
+      "occurrences": 8,
+      "trace": "PASS"
+    }
+  ],
+  "capture_invariance": [
+    {
+      "scenario": "demo",
+      "status": "PASS"
+    },
+    {
+      "scenario": "denied",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0
+  },
+  "boundaries": {
+    "remote_model_test": false,
+    "product_cli_profile_test": false,
+    "npm_published": false,
+    "heavy_core_v3_imported": false
+  },
+  "source_sha256": {
+    "package.json": "82946bceae31428ae1f341b1e003f34781b270024761fc2da1589c8048216065",
+    "pnpm-lock.yaml": "10fd2e3d1fa962f5c0f6187806a210155e9e0e1a9c531dbc2fb098e56aefeded",
+    "README.md": "2ea4d33869aa202e42881e1d5af5c7b86459ce16677859c8e382dad33fa977a6",
+    "cordis.patch.yml": "2e0cc822b2ddca035b3b99b28a7009e90bfafc6c5ed4d131dd305efe523881b5",
+    "src/plugin/harness-capture.ts": "6749d19386aafcae3e6e380862be21224e0104da01cf2804bb806f57b9c861a6",
+    "src/plugin/index.ts": "45d4f33cdd08e88d3883820a21d0a7c720b6f5abfec0244a649fadf7c6ff2f86",
+    "src/runtime/canonical.ts": "262284527efb8df0382f93dc769c0ff5b9edfd8e26ce2746e74d66535cdfc13e",
+    "src/runtime/graph.ts": "5d7c51a784733af26aaeaafffc1a6a3e17224d2e2fc303c77ae2286ecd1c5726",
+    "tests/agent.test.ts": "ed771b40c80e8a2411a01a081472fd8f1d60a64c84dae261690fcd3ac3a87076",
+    "tests/harness.test.ts": "e8b75a0a39ce593634d60d2ec089c9c6abecbbc7e8aea95b8ba9a2e5eb202680",
+    "tests/lifecycle.test.ts": "df4596c555e738e774deab7fb4af2db26bfbd29438c1b051d6fbb44dbb29c4fe",
+    "tests/runtime.test.ts": "77913511f063ac8bf5539a9e1f3c99ad23e84180042fcdeb96b48aab61df7746",
+    "examples/a.txt": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+    "examples/benchmark.ts": "53a41553cf103ec3404fb61077c3ce3a195b21dd2bd189f53535272ed9a13ec1",
+    "examples/demo.ts": "5555947d86d09c3e8c9446759395f880f623ac08766778cd8c4fff6b27be83fa",
+    "examples/fixture-agent.ts": "fd7c90f96305e21aa1b5edcf39fc1890a23aa6122c293ad3e312a01a033514dc",
+    "examples/package-smoke.mjs": "ab874f5748c96b7a6b1ab74da2bf853354f90a2e16e1048f3f4eaa9080e34301",
+    "examples/verify-artifacts.ts": "530b9074514392b0bc5699c2e26b4a8fc39d3cf9fde55fa4bdbcfecff1aad1eb"
+  }
+}

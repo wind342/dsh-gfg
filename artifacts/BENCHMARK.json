@@ -1,0 +1,107 @@
+{
+  "node": "v24.19.0",
+  "platform": "win32",
+  "cpu": "12th Gen Intel(R) Core(TM) i5-12490F",
+  "scope": "Synthetic zero-I/O tool; includes hooks/hash/append/compile. Excludes setup, final export, validation, and LLM time. Journal append is included; fsync reported separately. Not a production benchmark.",
+  "runs": [
+    {
+      "mode": "off",
+      "repetition": 0,
+      "calls": 500,
+      "execution_ms": 119.02440000000001,
+      "per_call_ms": 0.23804880000000003,
+      "local_query_ms": 0,
+      "offline_validation_ms": 0,
+      "facts": 0,
+      "fsync_ms": 0
+    },
+    {
+      "mode": "memory",
+      "repetition": 0,
+      "calls": 500,
+      "execution_ms": 380.669,
+      "per_call_ms": 0.761338,
+      "local_query_ms": 0.21750200000000064,
+      "offline_validation_ms": 1228.8020000000001,
+      "facts": 3000,
+      "fsync_ms": 0.05160000000000764
+    },
+    {
+      "mode": "journal",
+      "repetition": 0,
+      "calls": 500,
+      "execution_ms": 441.9263000000001,
+      "per_call_ms": 0.8838526000000002,
+      "local_query_ms": 0.21202700000000277,
+      "offline_validation_ms": 1165.3022,
+      "facts": 3000,
+      "fsync_ms": 0.3581000000003769
+    },
+    {
+      "mode": "journal",
+      "repetition": 1,
+      "calls": 500,
+      "execution_ms": 427.3101999999999,
+      "per_call_ms": 0.8546203999999998,
+      "local_query_ms": 0.22588399999999637,
+      "offline_validation_ms": 1122.2542000000003,
+      "facts": 3000,
+      "fsync_ms": 0.31419999999980064
+    },
+    {
+      "mode": "memory",
+      "repetition": 1,
+      "calls": 500,
+      "execution_ms": 349.82970000000023,
+      "per_call_ms": 0.6996594000000005,
+      "local_query_ms": 0.21376200000000609,
+      "offline_validation_ms": 1149.7106999999996,
+      "facts": 3000,
+      "fsync_ms": 0.0020999999997002305
+    },
+    {
+      "mode": "off",
+      "repetition": 1,
+      "calls": 500,
+      "execution_ms": 106.54010000000017,
+      "per_call_ms": 0.21308020000000033,
+      "local_query_ms": 0,
+      "offline_validation_ms": 0,
+      "facts": 0,
+      "fsync_ms": 0
+    },
+    {
+      "mode": "off",
+      "repetition": 2,
+      "calls": 500,
+      "execution_ms": 102.39750000000004,
+      "per_call_ms": 0.20479500000000006,
+      "local_query_ms": 0,
+      "offline_validation_ms": 0,
+      "facts": 0,
+      "fsync_ms": 0
+    },
+    {
+      "mode": "memory",
+      "repetition": 2,
+      "calls": 500,
+      "execution_ms": 341.8251999999993,
+      "per_call_ms": 0.6836503999999987,
+      "local_query_ms": 0.20743800000000193,
+      "offline_validation_ms": 1087.0537000000004,
+      "facts": 3000,
+      "fsync_ms": 0.0007999999997991836
+    },
+    {
+      "mode": "journal",
+      "repetition": 2,
+      "calls": 500,
+      "execution_ms": 415.3222999999998,
+      "per_call_ms": 0.8306445999999996,
+      "local_query_ms": 0.27070400000000516,
+      "offline_validation_ms": 1096.2798999999995,
+      "facts": 3000,
+      "fsync_ms": 1.174300000000585
+    }
+  ]
+}
