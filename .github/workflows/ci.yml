@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/dsh-runtime"
           printf '{"private":true}\n' > "$RUNNER_TEMP/dsh-runtime/package.json"
-          pnpm --dir "$RUNNER_TEMP/dsh-runtime" add @deepseek-ai/dsh@0.2.0-rc.2
+          npm --prefix "$RUNNER_TEMP/dsh-runtime" install @deepseek-ai/dsh@0.2.0-rc.2
       - name: Verify official profile install
         run: pnpm profile:smoke "$RUNNER_TEMP/dsh-runtime/node_modules/@deepseek-ai/dsh/lib/bin.js"
       - run: pnpm verify
